@@ -14,11 +14,12 @@
 
 /**
  *
- * @file Defines the interface of `org::konrba::common::StringStreamer` class
+ * @file 
+ * Defines the interface of `org::knorba::common::Streamer` class
  *
  */
 
-#ifndef ORG_KNORBA_COMMON_STIRNGSTREAMER
+#ifndef ORG_KNORBA_COMMON_STRINGSTREAMER
 #define ORG_KNORBA_COMMON_STRINGSTREAMER
 
 #include <sstream>
@@ -36,6 +37,8 @@ namespace common {
  * pure virtual function. This class defines and implements `toString()` 
  * function which internally invokes `printToStream(ostream&)` feeding it with
  * `std::stringstream`.
+ *
+ * @see operator<<(ostream&, Streamer&)
  */
 
 class Streamer {
@@ -52,6 +55,12 @@ public:
   */
   string toString();
 };
+
+/**
+ * Overloads `<<` operator so that any `Streamer` object can be directly
+ * used within standard `ostream` object like `cout`.
+ */
+ostream& operator<<(ostream& os, Streamer& streamer);
 
 } // common
 } // knorba

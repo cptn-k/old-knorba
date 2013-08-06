@@ -1,6 +1,6 @@
 /*---[Logger.cpp]---------------------------------------------m(._.)m--------*\
 |
-|  KnoRBA Common : Logging Facility
+|  KnoRBA Common / Logging Facility
 |
 |  Copyright (c) 2013, RIKEN (The Institute of Physical and Chemial Research)
 |  All rights reserved.
@@ -60,6 +60,7 @@ Logger::Channel::~Channel() {
 
 // -- Logger::Stream -----------------------------------------------------------
 
+/// \cond
 #define __K_ENUMERAND(X) Logger::Stream& Logger::Stream::operator<<(X a) {\
   for(vector<Channel*>::iterator it = _channels.begin();\
       it != _channels.end(); it++)\
@@ -75,6 +76,7 @@ Logger::Channel::~Channel() {
 __K_ENUMERATE_OVER_TYPES
 
 #undef __K_ENUMERAND
+/// \endcond
 
 void Logger::Stream::operator<<(logger_flag_t f) {
   for(vector<Channel*>::iterator it = _channels.begin();
@@ -135,6 +137,7 @@ void Logger::removeAllChannels() {
     Channel* ch = *it;
     delete ch;
   }
+  
   _channels.clear();
 }
 

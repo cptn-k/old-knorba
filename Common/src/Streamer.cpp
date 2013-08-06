@@ -14,7 +14,8 @@
 
 /**
  *
- * @file Implementation of `org::knorba::common::Streamer` class.
+ * @file
+ * Implementation of `org::knorba::common::Streamer` class.
  *
  */
 
@@ -28,6 +29,11 @@ string Streamer::toString() {
   stringstream stream;
   this->printToStream(stream);
   return stream.str();
+}
+
+ostream& operator<<(ostream& os, Streamer& streamer) {
+  streamer.printToStream(os);
+  return os;
 }
 
 } // namespace common

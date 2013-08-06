@@ -5,11 +5,11 @@ namespace org {
 namespace knorba {
 namespace common {
 
-void retain(void* ptr) {
+void retain(void*& ptr) {
   // Nothing
 }
 
-void release(void* ptr) {
+void release(void*& ptr) {
   // Nothing
 }
 

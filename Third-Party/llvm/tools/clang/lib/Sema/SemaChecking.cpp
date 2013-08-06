@@ -1786,6 +1786,10 @@ ExprResult Sema::SemaBuiltinShuffleVector(CallExpr *TheCall) {
                             diag::err_shufflevector_nonconstant_argument)
                        << TheCall->getArg(i)->getSourceRange());
 
+    // Allow -1 which will be translated to undef in the IR.
+    if (Result.isSigned() && Result.isAllOnesValue())
+      continue;
+
     if (Result.getActiveBits() > 64 || Result.getZExtValue() >= numElements*2)
       return ExprError(Diag(TheCall->getLocStart(),
                             diag::err_shufflevector_argument_too_large)
@@ -3917,7 +3921,7 @@ Sema::CheckReturnStackAddr(Expr *RetValExp, QualType lhsType,
 static Expr *EvalAddr(Expr *E, SmallVectorImpl<DeclRefExpr *> &refVars,
                       Decl *ParentDecl) {
   if (E->isTypeDependent())
-      return NULL;
+    return NULL;
 
   // We should only be called for evaluating pointer expressions.
   assert((E->getType()->isAnyPointerType() ||
