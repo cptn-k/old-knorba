@@ -144,7 +144,12 @@ void Logger::removeAllChannels() {
 Logger::Stream& Logger::log(level_t level, const char fileName[], 
                     int lineNumber, const char functionName[])
 {
-  const char* theName = strrchr(fileName, K_PATH_SEPARATOR_CH) + 1;
+  const char* theName = strrchr(fileName, K_PATH_SEPARATOR_CH);
+  if(theName == NULL)
+    theName = fileName;
+  else
+    theName++;
+
   Logger::Stream& res = (log(level) << '[' << functionName << '@' << theName 
                                      << ':' << lineNumber << "] ");
   return res;
