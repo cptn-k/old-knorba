@@ -22,7 +22,7 @@
 #ifndef ORG_KNORBA_COMMON_TIMER_H
 #define ORG_KNORBA_COMMON_TIMER_H
 
-#include "Common.h"
+#include "common.h"
 #include "Streamer.h"
 #include <ctime>
 #include <cmath>
